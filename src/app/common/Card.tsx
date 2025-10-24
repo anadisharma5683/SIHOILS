@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface CardProps {
   title: string;
@@ -22,6 +23,8 @@ const Card = ({ title, description, icon, className = '', children }: CardProps)
       }}
       whileTap={{ scale: 0.98 }}
       className={`bg-neutral rounded-xl p-6 shadow-lg border border-border ${className}`}
+      role="article"
+      aria-labelledby={`card-title-${title.replace(/\s+/g, '-').toLowerCase()}`}
     >
       {icon && (
         <motion.div 
@@ -35,10 +38,18 @@ const Card = ({ title, description, icon, className = '', children }: CardProps)
             delay: 0.2
           }}
         >
-          <img src={icon} alt={title} className="w-16 h-16" />
+          <Image 
+            src={icon} 
+            alt={title} 
+            width={64} 
+            height={64} 
+            className="w-16 h-16"
+            aria-hidden="true"
+          />
         </motion.div>
       )}
       <motion.h3 
+        id={`card-title-${title.replace(/\s+/g, '-').toLowerCase()}`}
         className="text-xl font-semibold text-gray-800 mb-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

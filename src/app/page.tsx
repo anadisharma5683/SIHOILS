@@ -1,5 +1,6 @@
 'use client';
 
+import type { Metadata } from 'next';
 import { heroData, featuresData } from '@/constants/dummyData';
 import Button from './common/Button';
 import Card from './common/Card';
@@ -8,13 +9,19 @@ import Link from 'next/link';
 import '@/styles/animations.css';
 import { useEffect, useState } from 'react';
 
+// Removed metadata export since we're in a Client Component
+
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // Check if user is logged in
     const userData = localStorage.getItem('user');
-    setIsLoggedIn(!!userData);
+    // Use requestAnimationFrame to avoid setState during render
+    const frame = requestAnimationFrame(() => {
+      setIsLoggedIn(!!userData);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   return (

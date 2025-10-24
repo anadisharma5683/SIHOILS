@@ -1,6 +1,24 @@
 // Loan & Insurance Data for Krishi Shield
 
-export const LOAN_DATA = [
+// Define types for our data
+interface LoanData {
+  id: string;
+  name: string;
+  eligibleLoan: string;
+  interest: string;
+  nextInstallment: string;
+  bank: string;
+  status: string;
+}
+
+interface ClaimHistory {
+  id: number;
+  date: string;
+  mishap: string;
+  status: string;
+}
+
+export const LOAN_DATA: LoanData[] = [
   { 
     id: 'MP2025KCC1234', 
     name: 'Ramesh Patil', 
@@ -30,7 +48,7 @@ export const LOAN_DATA = [
   }
 ];
 
-export const CLAIM_HISTORY = [
+export const CLAIM_HISTORY: ClaimHistory[] = [
   {
     id: 1,
     date: '15 Oct 2025',
@@ -50,5 +68,3 @@ export const CLAIM_HISTORY = [
     status: 'Submitted'
   }
 ];
-
-export default { LOAN_DATA, CLAIM_HISTORY };

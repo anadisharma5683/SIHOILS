@@ -87,6 +87,14 @@ const HedgingSimulator = () => {
         <div 
           className="w-full h-3 bg-gray-200 rounded-full cursor-pointer overflow-hidden"
           onClick={handleToggleHedge}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              handleToggleHedge();
+            }
+          }}
+          aria-label={isHedged ? "Deactivate hedging" : "Activate hedging"}
         >
           <motion.div 
             className={`h-full rounded-full ${isHedged ? 'bg-green-500' : 'bg-red-500'}`}
@@ -118,7 +126,7 @@ const HedgingSimulator = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
           >
-            With hedging, you're protected at ₹{contractPrice}/quintal regardless of market drops.
+            With hedging, you&apos;re protected at ₹{contractPrice}/quintal regardless of market drops.
             Potential savings: ₹{contractPrice - currentPrice}/quintal
           </motion.p>
         ) : (
@@ -128,7 +136,7 @@ const HedgingSimulator = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
           >
-            Without hedging, you're exposed to market fluctuations. 
+            Without hedging, you&apos;re exposed to market fluctuations. 
             Enable hedging to protect your income.
           </motion.p>
         )}

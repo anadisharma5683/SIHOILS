@@ -13,7 +13,11 @@ const Navbar = () => {
   useEffect(() => {
     // Check if user is logged in
     const userData = localStorage.getItem('user');
-    setIsLoggedIn(!!userData);
+    // Use requestAnimationFrame to avoid setState during render
+    const frame = requestAnimationFrame(() => {
+      setIsLoggedIn(!!userData);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const handleLogout = () => {
@@ -33,7 +37,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-softBG py-4 px-6 shadow-md">
+    <nav className="bg-softBG py-4 px-6 shadow-md" role="navigation" aria-label="Main navigation">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <motion.div 
           initial={{ opacity: 0, x: -30 }}
@@ -46,7 +50,9 @@ const Navbar = () => {
           }}
           className="text-2xl font-bold text-primary mb-4 md:mb-0"
         >
-          Krishi Shield
+          <Link href="/" aria-label="Krishi Shield Home">
+            Krishi Shield
+          </Link>
         </motion.div>
         
         <motion.ul 
@@ -62,6 +68,7 @@ const Navbar = () => {
             }
           }}
           className="flex flex-wrap justify-center gap-6"
+          role="menubar"
         >
           {navLinks.map((link) => (
             <motion.li
@@ -74,6 +81,7 @@ const Navbar = () => {
                 y: -2,
                 transition: { duration: 0.2 }
               }}
+              role="none"
             >
               <Link 
                 href={link.path}
@@ -82,6 +90,8 @@ const Navbar = () => {
                     ? 'text-highlight border-b-2 border-highlight' 
                     : 'text-gray-600 hover:text-primary'
                 }`}
+                role="menuitem"
+                aria-current={pathname === link.path ? "page" : undefined}
               >
                 {link.name}
               </Link>
@@ -98,6 +108,7 @@ const Navbar = () => {
                 y: -2,
                 transition: { duration: 0.2 }
               }}
+              role="none"
             >
               <Link 
                 href="/dashboard"
@@ -106,6 +117,8 @@ const Navbar = () => {
                     ? 'text-highlight border-b-2 border-highlight' 
                     : 'text-gray-600 hover:text-primary'
                 }`}
+                role="menuitem"
+                aria-current={pathname === '/dashboard' ? "page" : undefined}
               >
                 Dashboard
               </Link>
@@ -120,6 +133,7 @@ const Navbar = () => {
                 y: -2,
                 transition: { duration: 0.2 }
               }}
+              role="none"
             >
               <Link 
                 href="/login"
@@ -128,6 +142,8 @@ const Navbar = () => {
                     ? 'text-highlight border-b-2 border-highlight' 
                     : 'text-gray-600 hover:text-primary'
                 }`}
+                role="menuitem"
+                aria-current={pathname === '/login' ? "page" : undefined}
               >
                 Login
               </Link>
