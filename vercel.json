@@ -1,28 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/_next/static/(.*)",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ],
   "github": {
     "silent": true
-  },
-  "buildCommand": "next build",
-  "devCommand": "next dev",
-  "installCommand": "npm install",
-  "outputDirectory": ".next"
+  }
 }

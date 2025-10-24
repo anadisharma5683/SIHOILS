@@ -170,9 +170,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  
-  // Output configuration
-  output: 'standalone',
 };
 
 export default nextConfig;
