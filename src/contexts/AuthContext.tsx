@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     // Check if user is already logged in
     const checkAuthStatus = () => {
+      // First check localStorage
       const userData = localStorage.getItem('user');
       if (userData) {
         try {
@@ -33,6 +34,39 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         } catch (e) {
           console.error('Error parsing user data:', e);
           localStorage.removeItem('user');
+        }
+      } else {
+        // Check for user data in cookies (set by middleware)
+        const cookieUserData = document.cookie
+          .split('; ')
+          .find(row => row.startsWith('userData='));
+        
+        if (cookieUserData) {
+          try {
+            const userData = JSON.parse(decodeURIComponent(cookieUserData.split('=')[1]));
+            setUser(userData);
+            // Also save to localStorage for consistency
+            localStorage.setItem('user', JSON.stringify(userData));
+          } catch (e) {
+            console.error('Error parsing cookie user data:', e);
+          }
+        } else {
+          // Create demo user automatically
+          const demoUser = {
+            name: 'Rajesh Kumar',
+            email: 'farmer@krishishield.com',
+            role: 'farmer'
+          };
+          
+          try {
+            localStorage.setItem('user', JSON.stringify(demoUser));
+            // Also set a cookie for middleware authentication
+            document.cookie = `authToken=${btoa(JSON.stringify(demoUser))}; path=/; max-age=86400`;
+            document.cookie = `userData=${JSON.stringify(demoUser)}; path=/; max-age=86400`;
+            setUser(demoUser);
+          } catch (e) {
+            console.error('Error saving user data:', e);
+          }
         }
       }
       setLoading(false);
@@ -70,6 +104,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem('user', JSON.stringify(userInfo));
         // Also set a cookie for middleware authentication
         document.cookie = `authToken=${btoa(JSON.stringify(userInfo))}; path=/; max-age=86400`;
+        document.cookie = `userData=${JSON.stringify(userInfo)}; path=/; max-age=86400`;
         setUser(userInfo);
         return true;
       } catch (e) {
@@ -86,8 +121,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       localStorage.removeItem('user');
       document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      document.cookie = 'userData=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
       setUser(null);
-      router.push('/login');
+      // Redirect to home page instead of login since we removed the login page
+      router.push('/');
     } catch (e) {
       console.error('Error during logout:', e);
     }

@@ -7,22 +7,18 @@ import Card from './common/Card';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import '@/styles/animations.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 // Removed metadata export since we're in a Client Component
 
 export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    // Check if user is logged in
-    const userData = localStorage.getItem('user');
-    // Use requestAnimationFrame to avoid setState during render
-    const frame = requestAnimationFrame(() => {
-      setIsLoggedIn(!!userData);
-    });
-    return () => cancelAnimationFrame(frame);
-  }, []);
+    // Redirect to dashboard immediately
+    router.push('/dashboard');
+  }, [router]);
 
   return (
     <div className="min-h-screen bg-softBG">
@@ -73,11 +69,9 @@ export default function Home() {
                 <Link href="/features">
                   <Button>{heroData.ctaText}</Button>
                 </Link>
-                {!isLoggedIn && (
-                  <Link href="/login">
-                    <Button variant="secondary">Login to Dashboard</Button>
-                  </Link>
-                )}
+                <Link href="/dashboard">
+                  <Button variant="secondary">Go to Dashboard</Button>
+                </Link>
               </motion.div>
             </motion.div>
             
@@ -196,8 +190,8 @@ export default function Home() {
                 visible: { opacity: 1, y: 0 }
               }}
             >
-              <Link href="/features">
-                <Button variant="secondary">Explore Our Tools</Button>
+              <Link href="/dashboard">
+                <Button variant="secondary">Go to Dashboard</Button>
               </Link>
             </motion.div>
           </motion.div>

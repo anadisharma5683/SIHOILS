@@ -28,12 +28,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const { user, loading, logout } = useAuth();
 
-  useEffect(() => {
-    // Redirect to login if not authenticated
-    if (!loading && !user) {
-      router.push('/login');
-    }
-  }, [user, loading, router]);
+  // Remove the useEffect that redirects to login since we're removing the login page
 
   if (loading)
     return (
@@ -45,11 +40,11 @@ export default function DashboardPage() {
       </div>
     );
 
-  if (!user) return null;
+  // Remove the check for !user since we're automatically creating a demo user
 
   // Stats data
   const stats =
-    user.role === 'admin'
+    user?.role === 'admin'
       ? [
           {
             title: 'Total Farmers',
