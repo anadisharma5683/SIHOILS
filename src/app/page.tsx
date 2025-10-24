@@ -6,8 +6,17 @@ import Card from './common/Card';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import '@/styles/animations.css';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if user is logged in
+    const userData = localStorage.getItem('user');
+    setIsLoggedIn(!!userData);
+  }, []);
+
   return (
     <div className="min-h-screen bg-softBG">
       {/* Hero Section */}
@@ -49,6 +58,7 @@ export default function Home() {
                 {heroData.description}
               </motion.p>
               <motion.div
+                className="flex flex-col sm:flex-row gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
@@ -56,6 +66,11 @@ export default function Home() {
                 <Link href="/features">
                   <Button>{heroData.ctaText}</Button>
                 </Link>
+                {!isLoggedIn && (
+                  <Link href="/login">
+                    <Button variant="secondary">Login to Dashboard</Button>
+                  </Link>
+                )}
               </motion.div>
             </motion.div>
             
