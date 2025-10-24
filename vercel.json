@@ -10,6 +10,30 @@
     {
       "src": "/(.*)",
       "dest": "/"
+    },
+    {
+      "src": "/_next/static/(.*)",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/_next/static/chunks/(.*)",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
+    },
+    {
+      "src": "/_next/static/css/(.*)",
+      "headers": {
+        "Content-Type": "text/css"
+      }
+    },
+    {
+      "src": "/_next/static/media/(.*)",
+      "headers": {
+        "Content-Type": "font/woff2"
+      }
     }
   ],
   "github": {

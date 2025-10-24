@@ -167,6 +167,18 @@ NEXT_PUBLIC_ENABLE_DEMO_MODE=true
 
 The application includes security headers and Content Security Policy by default. All cookies are configured with secure settings for production.
 
+## Performance Optimizations
+
+The application includes several performance optimizations to ensure fast loading and smooth user experience:
+
+- **Font Optimization**: Custom font handling to prevent preload warnings
+- **Image Optimization**: Next.js image component with automatic optimization
+- **Code Splitting**: Automatic code splitting for faster initial loads
+- **Caching**: Proper cache headers for static assets
+- **Minification**: Automatic minification of CSS and JavaScript
+
+For detailed information about performance optimizations, see [Performance Optimization Documentation](docs/performance-optimization.md).
+
 ## Design Principles
 
 - **Mobile-first**: Responsive design that works on all devices
