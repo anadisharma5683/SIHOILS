@@ -61,6 +61,7 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Static asset headers - specific patterns first
       {
         source: '/_next/static/chunks/:path*.css',
         headers: [
@@ -100,6 +101,33 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        source: '/_next/static/media/:path*.woff',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'font/woff',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/media/:path*.ttf',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'font/ttf',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // General static asset headers
       {
         source: '/_next/static/:path*',
         headers: [
