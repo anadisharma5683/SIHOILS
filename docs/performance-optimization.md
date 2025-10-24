@@ -9,12 +9,12 @@ This document explains the changes made to resolve browser console warnings rela
    - Example: `The resource https://sihoils.vercel.app/_next/static/media/caa3a2e1cccd8315-s.p.853070df.woff2 was preloaded using link preload but not used within a few seconds from the window's load event.`
 
 2. **CSS/JS MIME Type Error**:
-   - Error: `Refused to apply style from 'https://sihoils.vercel.app/_next/static/chunks/c8d63484c312b3bd.css' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.`
+   - Error: `Refused to apply style from 'https://sihoils.vercel.app/_next/static/chunks/e0afff64e591cdab.css' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.`
    - Error: `Refused to execute script from 'https://sihoils.vercel.app/_next/static/chunks/6f47d9648a939831.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.`
 
 ## Root Cause
 
-The MIME type errors were caused by incorrect route ordering in `vercel.json`. The catch-all route `"/(.*)"` was intercepting requests for static assets before they could be served with proper MIME types. Additionally, the application structure includes various static asset directories that needed specific handling.
+The MIME type errors were caused by static assets being served with incorrect Content-Type headers. The previous approach of using route configurations in `vercel.json` was conflicting with Next.js's built-in asset handling.
 
 ## Solutions Implemented
 
@@ -34,23 +34,20 @@ The MIME type errors were caused by incorrect route ordering in `vercel.json`. T
 - Copied actual WOFF2 font files from the build output to this directory
 - Added a README.md to explain the font handling approach
 
-### 2. MIME Type Fix
-
-**Changes made in `vercel.json`**:
-- Reordered routes to ensure static assets are handled before the catch-all route
-- Added specific routes for different file types with proper MIME types:
-  - JavaScript files: `application/javascript`
-  - CSS files: `text/css`
-  - Font files: `font/woff2`
-- Made route patterns more specific using file extensions
-- Added a pattern to handle hashed directory names in the static path
-- Ensured proper cache control headers for all static assets
+### 2. MIME Type Fix (Improved Approach)
 
 **Changes made in `next.config.ts`**:
-- Added comprehensive header configurations for different static asset types
-- Added cache control headers for chunks, css, and media files
-- Added `output: 'standalone'` for better deployment optimization
-- Enhanced security headers with proper Content Security Policy
+- Added specific header configurations for different static asset types:
+  - CSS files: `text/css` Content-Type with proper caching
+  - JavaScript files: `application/javascript` Content-Type with proper caching
+  - Font files: `font/woff2` Content-Type with proper caching
+- Moved all static asset header handling from `vercel.json` to `next.config.ts` to align with Next.js best practices
+- Simplified `vercel.json` to only include the basic catch-all route
+
+**Changes made in `vercel.json`**:
+- Removed complex route configurations that were conflicting with Next.js asset handling
+- Simplified to only include the basic catch-all route
+- This prevents conflicts between Vercel routing and Next.js static asset serving
 
 ## Benefits
 
@@ -60,14 +57,16 @@ The MIME type errors were caused by incorrect route ordering in `vercel.json`. T
 4. **Reduced Bandwidth**: Only fonts that are actually used will be loaded
 5. **Proper Asset Serving**: Static files are served with correct MIME types
 6. **Enhanced Security**: Improved Content Security Policy and security headers
+7. **Follows Best Practices**: Aligns with Next.js and Vercel recommended configurations
 
 ## How It Works
 
 1. Next.js no longer automatically preloads Google Fonts
 2. Fonts are defined with `@font-face` in CSS and loaded on-demand
-3. Vercel routes are ordered to serve static files with correct MIME types before falling back to the catch-all route
-4. Browser caching is optimized with appropriate cache headers
-5. Security is enhanced with proper Content Security Policy headers
+3. Next.js handles static asset serving with proper Content-Type headers as configured in `next.config.ts`
+4. Vercel routes are simplified to avoid conflicts with Next.js asset handling
+5. Browser caching is optimized with appropriate cache headers
+6. Security is enhanced with proper Content Security Policy headers
 
 ## Testing
 
@@ -89,3 +88,4 @@ To verify the fixes:
 3. Regularly audit static assets for similar issues
 4. Test the application across different browsers to ensure consistent behavior
 5. Monitor Vercel analytics for any performance regressions after deployment
+6. Keep Next.js and Vercel configurations updated with best practices
