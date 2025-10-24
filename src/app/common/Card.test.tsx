@@ -25,7 +25,7 @@ describe('Card', () => {
     );
     
     // The icon is rendered as an img element with Next.js Image component
-    const icon = screen.getByAltText('Test Card');
+    const icon = screen.getByAltText('Test Card icon');
     expect(icon).toBeInTheDocument();
     expect(icon).toHaveAttribute('src');
   });

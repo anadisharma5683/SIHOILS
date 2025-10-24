@@ -2,6 +2,13 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { AuthProvider, useAuth } from './AuthContext';
 
+// Mock next/navigation
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
+}));
+
 // Test component that uses the auth context
 const TestComponent = () => {
   const { user, login, logout, loading } = useAuth();
