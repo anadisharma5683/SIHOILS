@@ -8,23 +8,19 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/"
-    },
-    {
       "src": "/_next/static/(.*)",
       "headers": {
         "Cache-Control": "public, max-age=31536000, immutable"
       }
     },
     {
-      "src": "/_next/static/chunks/(.*)",
+      "src": "/_next/static/chunks/(.*\\.js)",
       "headers": {
         "Content-Type": "application/javascript"
       }
     },
     {
-      "src": "/_next/static/css/(.*)",
+      "src": "/_next/static/chunks/(.*\\.css)",
       "headers": {
         "Content-Type": "text/css"
       }
@@ -34,6 +30,16 @@
       "headers": {
         "Content-Type": "font/woff2"
       }
+    },
+    {
+      "src": "/_next/static/([^/]+)/(.*)",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
     }
   ],
   "github": {

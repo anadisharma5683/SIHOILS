@@ -71,6 +71,33 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: '/_next/static/chunks/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/css/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/media/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
         source: '/images/:path*',
         headers: [
           {
@@ -103,6 +130,9 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  
+  // Output configuration
+  output: 'standalone',
 };
 
 export default nextConfig;
