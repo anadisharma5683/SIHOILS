@@ -49,38 +49,88 @@ const MarketAlerts = () => {
   };
 
   return (
-    <div className="bg-accent rounded-xl p-6 shadow-md border border-border">
-      <h3 className="text-xl font-semibold text-gray-800 mb-4">Market Alerts</h3>
-      <p className="text-gray-600 mb-6">
+    <div className="bg-neutral rounded-xl p-6 shadow-lg border border-border">
+      <motion.h3 
+        className="text-xl font-semibold text-gray-800 mb-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        Market Alerts
+      </motion.h3>
+      <motion.p 
+        className="text-gray-600 mb-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
+      >
         Stay informed with real-time alerts relevant to your farming operations
-      </p>
+      </motion.p>
       
       <div className="space-y-4">
         {alerts.map((alert, index) => (
           <motion.div
             key={alert.id}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
             className={`p-4 rounded-lg border ${getPriorityColor(alert.priority)} flex items-start`}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
+            whileHover={{ 
+              x: 10,
+              transition: { duration: 0.2 }
+            }}
           >
-            <span className="text-2xl mr-3">{getAlertIcon(alert.type)}</span>
+            <motion.span 
+              className="text-2xl mr-3"
+              whileHover={{ 
+                rotate: [0, 10, -10, 0],
+                transition: { duration: 0.5 }
+              }}
+            >
+              {getAlertIcon(alert.type)}
+            </motion.span>
             <div className="flex-1">
               <div className="flex justify-between">
-                <h4 className="font-semibold text-gray-800">{alert.title}</h4>
-                <span className="text-xs text-gray-500">{alert.time}</span>
+                <motion.h4 
+                  className="font-semibold text-gray-800"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                >
+                  {alert.title}
+                </motion.h4>
+                <motion.span 
+                  className="text-xs text-gray-500"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 + index * 0.1 }}
+                >
+                  {alert.time}
+                </motion.span>
               </div>
-              <p className="text-gray-600 mt-1">{alert.message}</p>
+              <motion.p 
+                className="text-gray-600 mt-1"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 + index * 0.1 }}
+              >
+                {alert.message}
+              </motion.p>
             </div>
           </motion.div>
         ))}
       </div>
       
-      <div className="mt-6 text-center">
-        <button className="text-primary font-medium hover:underline">
+      <motion.div 
+        className="mt-6 text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+      >
+        <button className="text-primary font-medium hover:underline focus:outline-none">
           View All Alerts
         </button>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -15,36 +15,78 @@ export default function Home() {
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0 }
+              }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               className="md:w-1/2 mb-12 md:mb-0"
             >
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6">
+              <motion.h1 
+                className="text-4xl md:text-6xl font-bold text-gray-800 mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
                 {heroData.title}
-              </h1>
-              <p className="text-xl text-gray-600 mb-4">
+              </motion.h1>
+              <motion.p 
+                className="text-xl text-gray-600 mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
                 {heroData.subtitle}
-              </p>
-              <p className="text-gray-600 mb-8 max-w-lg">
+              </motion.p>
+              <motion.p 
+                className="text-gray-600 mb-8 max-w-lg"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
                 {heroData.description}
-              </p>
-              <Link href="/features">
-                <Button>{heroData.ctaText}</Button>
-              </Link>
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <Link href="/features">
+                  <Button>{heroData.ctaText}</Button>
+                </Link>
+              </motion.div>
             </motion.div>
             
             <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.2,
+                type: "spring",
+                stiffness: 100
+              }}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.3 }
+              }}
               className="md:w-1/2 flex justify-center"
             >
-              <div className="bg-accent rounded-full p-8 w-80 h-80 flex items-center justify-center">
-                <img 
+              <div className="bg-accent rounded-full p-8 w-80 h-80 flex items-center justify-center shadow-xl">
+                <motion.img 
                   src="/images/hero.png" 
                   alt="Krishi Shield" 
                   className="rounded-full w-full h-full object-cover"
+                  animate={{ 
+                    rotate: [0, 5, -5, 0],
+                  }}
+                  transition={{ 
+                    duration: 8,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
                 />
               </div>
             </motion.div>
@@ -78,6 +120,10 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ 
+                  y: -10,
+                  transition: { duration: 0.3 }
+                }}
               >
                 <Card 
                   title={feature.title}
@@ -94,20 +140,44 @@ export default function Home() {
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: { opacity: 1, y: 0 }
+            }}
             transition={{ duration: 0.6 }}
+            className="staggered-children"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-gray-800 mb-6"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+            >
               Ready to Protect Your Harvest?
-            </h2>
-            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-gray-600 mb-8 max-w-2xl mx-auto"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+            >
               Join thousands of farmers who are already using Krishi Shield to safeguard their income
-            </p>
-            <Link href="/features">
-              <Button variant="secondary">Explore Our Tools</Button>
-            </Link>
+            </motion.p>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+            >
+              <Link href="/features">
+                <Button variant="secondary">Explore Our Tools</Button>
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>

@@ -1,11 +1,12 @@
-// Color Theme for Krishi Shield (updated background color)
+// Enhanced Color Theme for Krishi Shield with more vibrant colors
 export const theme = {
-  primary: '#fec5bbff',    // Melon - buttons, highlights
-  secondary: '#fcd5ceff',  // Pale Dogwood - section backgrounds
-  accent: '#fae1ddff',     // Misty Rose - cards
-  softBG: '#f0f7f4ff',     // Light mint green - page background
-  border: '#e8e8e4ff',     // Timberwolf - separators
-  neutral: '#d8e2dcff',    // Platinum - neutral areas
+  primary: '#4caf50ff',    // Green - buttons, highlights (more vibrant)
+  secondary: '#81c784ff',  // Light Green - section backgrounds
+  accent: '#a5d6a7ff',     // Lighter Green - cards
+  softBG: '#e8f5e9ff',     // Very Light Green - page background
+  border: '#c8e6c9ff',     // Light Green Border - separators
+  neutral: '#ffffff',      // White - neutral areas
+  highlight: '#2e7d32ff',  // Dark Green - for emphasis
 };
 
 export default theme;

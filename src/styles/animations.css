@@ -1,4 +1,4 @@
-/* Custom animations for Krishi Shield */
+/* Enhanced animations for Krishi Shield */
 
 @keyframes fadeIn {
   from {
@@ -11,7 +11,7 @@
 
 @keyframes slideUp {
   from {
-    transform: translateY(20px);
+    transform: translateY(30px);
     opacity: 0;
   }
   to {
@@ -22,7 +22,7 @@
 
 @keyframes slideInLeft {
   from {
-    transform: translateX(-20px);
+    transform: translateX(-30px);
     opacity: 0;
   }
   to {
@@ -33,7 +33,7 @@
 
 @keyframes slideInRight {
   from {
-    transform: translateX(20px);
+    transform: translateX(30px);
     opacity: 0;
   }
   to {
@@ -42,18 +42,109 @@
   }
 }
 
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .fade-in {
-  animation: fadeIn 0.5s ease-in;
+  animation: fadeIn 0.6s ease-out;
 }
 
 .slide-up {
-  animation: slideUp 0.5s ease-out;
+  animation: slideUp 0.6s ease-out;
 }
 
 .slide-in-left {
-  animation: slideInLeft 0.5s ease-out;
+  animation: slideInLeft 0.6s ease-out;
 }
 
 .slide-in-right {
-  animation: slideInRight 0.5s ease-out;
+  animation: slideInRight 0.6s ease-out;
+}
+
+.scale-in {
+  animation: scaleIn 0.4s ease-out;
+}
+
+.bounce-in {
+  animation: bounceIn 0.6s ease-out;
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Staggered animations */
+.staggered-children > * {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.staggered-children > :nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.staggered-children > :nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.staggered-children > :nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.staggered-children > :nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.staggered-children > :nth-child(5) {
+  animation-delay: 0.5s;
 }

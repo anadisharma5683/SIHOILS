@@ -12,20 +12,47 @@ interface CardProps {
 const Card = ({ title, description, icon, className = '' }: CardProps) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ y: -10 }}
-      className={`bg-accent rounded-xl p-6 shadow-md border border-border ${className}`}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      whileHover={{ 
+        y: -10,
+        transition: { duration: 0.3 }
+      }}
+      whileTap={{ scale: 0.98 }}
+      className={`bg-neutral rounded-xl p-6 shadow-lg border border-border ${className}`}
     >
       {icon && (
-        <div className="mb-4 flex justify-center">
+        <motion.div 
+          className="mb-4 flex justify-center"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ 
+            type: "spring", 
+            stiffness: 260, 
+            damping: 20,
+            delay: 0.2
+          }}
+        >
           <img src={icon} alt={title} className="w-16 h-16" />
-        </div>
+        </motion.div>
       )}
-      <h3 className="text-xl font-semibold text-gray-800 mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      <motion.h3 
+        className="text-xl font-semibold text-gray-800 mb-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        {title}
+      </motion.h3>
+      <motion.p 
+        className="text-gray-600"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+      >
+        {description}
+      </motion.p>
     </motion.div>
   );
 };
