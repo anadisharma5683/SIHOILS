@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { MapPin, TrendingUp } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import theme from '@/constants/theme';
 
 export default function InsightsPage() {
   const router = useRouter();
@@ -21,17 +22,18 @@ export default function InsightsPage() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-gradient-to-br from-[#fff5f3] via-[#fef3f2] to-[#ffeae2] p-6 md:p-10"
+      className="min-h-screen bg-gradient-to-br from-[#d5f9de] via-[#e0f5e5] to-[#d5f9de] p-6 md:p-10"
     >
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Market Insights</h1>
-            <p className="text-gray-600">Visualize mandi data and real-time selling rates</p>
+            <h1 className="text-3xl font-bold text-[#374151]">Market Insights</h1>
+            <p className="text-[#545e75]">Visualize mandi data and real-time selling rates</p>
           </div>
           <Button
             variant="secondary"
             onClick={() => router.push('/dashboard')}
+            className="bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]"
           >
             Back to Dashboard
           </Button>
@@ -40,33 +42,33 @@ export default function InsightsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white p-6 rounded-2xl shadow-md border border-[#fcd5ce]"
+          className="bg-white p-6 rounded-2xl shadow-md border border-[#8aa399]"
         >
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-gray-800">Live Market Rates</h2>
-            <Button variant="secondary" className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-[#374151]">Live Market Rates</h2>
+            <Button variant="secondary" className="flex items-center gap-2 bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]">
               <MapPin size={16} />
               View Map
             </Button>
           </div>
           
           <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-[#fcd5ce] rounded-lg">
+            <table className="min-w-full bg-white border border-[#8aa399] rounded-lg">
               <thead>
-                <tr className="bg-[#fff5f3]">
-                  <th className="py-3 px-4 text-left text-gray-700 font-semibold">Crop</th>
-                  <th className="py-3 px-4 text-left text-gray-700 font-semibold">Location</th>
-                  <th className="py-3 px-4 text-left text-gray-700 font-semibold">Current Rate (₹/quintal)</th>
-                  <th className="py-3 px-4 text-left text-gray-700 font-semibold">Change</th>
+                <tr className="bg-[#f0f9f2]">
+                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">Crop</th>
+                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">Location</th>
+                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">Current Rate (₹/quintal)</th>
+                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">Change</th>
                 </tr>
               </thead>
               <tbody>
                 {marketInsightsData.map((item, index) => (
-                  <tr key={index} className="border-b border-[#fae1dd] hover:bg-[#fff9f8]">
-                    <td className="py-3 px-4 text-gray-800">{item.crop}</td>
-                    <td className="py-3 px-4 text-gray-600">{item.location}</td>
-                    <td className="py-3 px-4 text-gray-800 font-medium">{item.rate}</td>
-                    <td className={`py-3 px-4 font-medium ${item.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+                  <tr key={index} className="border-b border-[#e5e7eb] hover:bg-[#f0f9f2]">
+                    <td className="py-3 px-4 text-[#374151]">{item.crop}</td>
+                    <td className="py-3 px-4 text-[#545e75]">{item.location}</td>
+                    <td className="py-3 px-4 text-[#374151] font-medium">{item.rate}</td>
+                    <td className={`py-3 px-4 font-medium ${item.change.startsWith('+') ? 'text-green-600' : 'text-[#fcb1a6]'}`}>
                       {item.change}
                     </td>
                   </tr>
@@ -78,17 +80,17 @@ export default function InsightsPage() {
           <div className="h-64 mt-6">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={marketInsightsData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#fcd5ce" />
-                <XAxis dataKey="crop" stroke="#888" />
-                <YAxis stroke="#888" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#8aa399" />
+                <XAxis dataKey="crop" stroke="#545e75" />
+                <YAxis stroke="#545e75" />
                 <Tooltip 
                   contentStyle={{ 
                     backgroundColor: 'white', 
-                    border: '1px solid #fcd5ce', 
+                    border: '1px solid #8aa399', 
                     borderRadius: '8px' 
                   }} 
                 />
-                <Bar dataKey="rate" fill="#e5989b" />
+                <Bar dataKey="rate" fill="#304d6d" />
               </BarChart>
             </ResponsiveContainer>
           </div>

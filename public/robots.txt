@@ -1,0 +1,9 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://krishishield.com/sitemap.xml
+
+# Host
+Host: https://krishishield.com

@@ -1,20 +1,14 @@
 // Utility functions for Krishi Shield
 
 export const formatCurrency = (amount: number): string => {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0
-  }).format(amount);
+  // Use a fixed format to avoid hydration issues
+  return `₹${amount.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
 };
 
 export const formatDate = (dateString: string): string => {
-  const options: Intl.DateTimeFormatOptions = { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  };
-  return new Date(dateString).toLocaleDateString('en-IN', options);
+  // Use a fixed format to avoid hydration issues
+  const date = new Date(dateString);
+  return `${date.getDate()} ${date.toLocaleString('en-US', { month: 'long' })} ${date.getFullYear()}`;
 };
 
 export const capitalizeFirstLetter = (string: string): string => {

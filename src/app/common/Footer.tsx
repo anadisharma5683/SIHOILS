@@ -22,7 +22,7 @@ const Footer = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            &copy; {new Date().getFullYear()} Krishi Shield. All rights reserved.
+            © 2025 Krishi Shield. All rights reserved.
           </motion.p>
           <motion.p 
             className="text-gray-500 text-sm"

@@ -11,5 +11,12 @@
       "src": "/(.*)",
       "dest": "/"
     }
-  ]
+  ],
+  "github": {
+    "silent": true
+  },
+  "buildCommand": "next build",
+  "devCommand": "next dev",
+  "installCommand": "npm install",
+  "outputDirectory": ".next"
 }

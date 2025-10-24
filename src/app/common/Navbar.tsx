@@ -15,11 +15,11 @@ const Navbar = () => {
   useEffect(() => {
     // Check if user is logged in
     const userData = localStorage.getItem('user');
-    // Use requestAnimationFrame to avoid setState during render
-    const frame = requestAnimationFrame(() => {
+    // Use setTimeout to avoid setState during render
+    const timer = setTimeout(() => {
       setIsLoggedIn(!!userData);
-    });
-    return () => cancelAnimationFrame(frame);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleLogout = () => {

@@ -99,13 +99,15 @@ krishi-shield/
 
 ## Color Theme
 
-- Primary: #4caf50ff (Green) - buttons, highlights
-- Secondary: #81c784ff (Light Green) - section backgrounds
-- Accent: #a5d6a7ff (Lighter Green) - cards
-- SoftBG: #e8f5e9ff (Very Light Green) - page background
-- Border: #c8e6c9ff (Light Green Border) - separators
-- Neutral: #ffffff (White) - neutral areas
-- Highlight: #2e7d32ff (Dark Green) - for emphasis
+The application now uses a generalized color theme based on the following palette:
+
+- **Cambridge Blue**: `#8aa399` - Used for secondary backgrounds and highlights
+- **Paynes Gray**: `#545e75` - Used for accents and text
+- **Yinmn Blue**: `#304d6d` - Primary color for buttons and important elements
+- **Melon**: `#fcb1a6` - Error states and warnings
+- **Nyanza**: `#d5f9de` - Main background color
+
+For detailed information about the theme implementation, see [Color Theme Documentation](docs/color-theme.md).
 
 ## Getting Started
 
@@ -144,6 +146,27 @@ krishi-shield/
 - Farmer: farmer@krishishield.com / farmer123
 - Admin: admin@krishishield.com / admin123
 
+## Production Deployment
+
+For production deployment instructions, see [Production Deployment Guide](docs/production-deployment.md).
+
+### Environment Variables
+
+Create a `.env.production` file with the following variables:
+
+```
+NEXT_PUBLIC_APP_NAME=Krishi Shield
+NEXT_PUBLIC_APP_DESCRIPTION=Empowering Indian oilseed farmers with virtual hedging simulations, AI-powered market insights, and blockchain-inspired trust.
+NEXT_PUBLIC_BASE_URL=https://yourdomain.com
+NEXT_PUBLIC_ENV=production
+NEXT_PUBLIC_ENABLE_MOCK_DATA=false
+NEXT_PUBLIC_ENABLE_DEMO_MODE=true
+```
+
+### Security
+
+The application includes security headers and Content Security Policy by default. All cookies are configured with secure settings for production.
+
 ## Design Principles
 
 - **Mobile-first**: Responsive design that works on all devices
@@ -180,11 +203,20 @@ Run tests with:
 npm run test
 ```
 
+## Troubleshooting
+
+### Turbopack Root Directory Warning
+
+If you see a warning about Next.js inferring the workspace root incorrectly, this is due to duplicate package.json files in nested directories. The application is configured to run from the current directory (`SIHOILS/SIHOILS`) and not the parent directory.
+
+To resolve this issue:
+1. Ensure you're running commands from the correct project directory
+2. If the warning persists, you can safely ignore it as it doesn't affect functionality
+
 ## Contributing
 
 This is a static MVP prototype. All data is mocked and there is no backend implementation.
 
 ## License
 
-This project is a prototype developed for demonstration purposes.# SIHOILS
-# SIH-OILS-V2
+This project is a prototype developed for demonstration purposes.
