@@ -26,50 +26,46 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     // Check if user is already logged in
     const checkAuthStatus = () => {
-      // First check localStorage
-      const userData = localStorage.getItem('user');
-      if (userData) {
-        try {
+      try {
+        // First check localStorage
+        const userData = localStorage.getItem('user');
+        if (userData) {
           setUser(JSON.parse(userData));
-        } catch (e) {
-          console.error('Error parsing user data:', e);
-          localStorage.removeItem('user');
-        }
-      } else {
-        // Check for user data in cookies (set by middleware)
-        const cookieUserData = document.cookie
-          .split('; ')
-          .find(row => row.startsWith('userData='));
-        
-        if (cookieUserData) {
-          try {
+        } else {
+          // Check for user data in cookies (set by middleware)
+          const cookieUserData = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('userData='));
+          
+          if (cookieUserData) {
             const userData = JSON.parse(decodeURIComponent(cookieUserData.split('=')[1]));
             setUser(userData);
             // Also save to localStorage for consistency
             localStorage.setItem('user', JSON.stringify(userData));
-          } catch (e) {
-            console.error('Error parsing cookie user data:', e);
-          }
-        } else {
-          // Create demo user automatically
-          const demoUser = {
-            name: 'Rajesh Kumar',
-            email: 'farmer@krishishield.com',
-            role: 'farmer'
-          };
-          
-          try {
+          } else {
+            // Create demo user automatically
+            const demoUser = {
+              name: 'Rajesh Kumar',
+              email: 'farmer@krishishield.com',
+              role: 'farmer'
+            };
+            
             localStorage.setItem('user', JSON.stringify(demoUser));
             // Also set a cookie for middleware authentication
             document.cookie = `authToken=${btoa(JSON.stringify(demoUser))}; path=/; max-age=86400`;
             document.cookie = `userData=${JSON.stringify(demoUser)}; path=/; max-age=86400`;
             setUser(demoUser);
-          } catch (e) {
-            console.error('Error saving user data:', e);
           }
         }
+      } catch (error) {
+        console.error('Error checking auth status:', error);
+        // Clear any corrupted data
+        localStorage.removeItem('user');
+        document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = 'userData=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     // Use requestAnimationFrame to avoid setState during render
@@ -80,40 +76,40 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (email: string, password: string): Promise<boolean> => {
     setLoading(true);
     
-    // Demo credentials
-    const demoCredentials = [
-      { email: 'farmer@krishishield.com', password: 'farmer123', name: 'Rajesh Kumar' },
-      { email: 'admin@krishishield.com', password: 'admin123', name: 'Admin User' }
-    ];
+    try {
+      // Demo credentials
+      const demoCredentials = [
+        { email: 'farmer@krishishield.com', password: 'farmer123', name: 'Rajesh Kumar' },
+        { email: 'admin@krishishield.com', password: 'admin123', name: 'Admin User' }
+      ];
 
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const credentials = demoCredentials.find(
-      cred => cred.email === email && cred.password === password
-    );
+      const credentials = demoCredentials.find(
+        cred => cred.email === email && cred.password === password
+      );
 
-    if (credentials) {
-      const userInfo = {
-        name: credentials.name,
-        email: credentials.email,
-        role: credentials.email === 'admin@krishishield.com' ? 'admin' : 'farmer'
-      };
+      if (credentials) {
+        const userInfo = {
+          name: credentials.name,
+          email: credentials.email,
+          role: credentials.email === 'admin@krishishield.com' ? 'admin' : 'farmer'
+        };
 
-      try {
         localStorage.setItem('user', JSON.stringify(userInfo));
         // Also set a cookie for middleware authentication
         document.cookie = `authToken=${btoa(JSON.stringify(userInfo))}; path=/; max-age=86400`;
         document.cookie = `userData=${JSON.stringify(userInfo)}; path=/; max-age=86400`;
         setUser(userInfo);
         return true;
-      } catch (e) {
-        console.error('Error saving user data:', e);
-        return false;
       }
+    } catch (error) {
+      console.error('Login error:', error);
+    } finally {
+      setLoading(false);
     }
 
-    setLoading(false);
     return false;
   };
 
@@ -125,8 +121,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(null);
       // Redirect to home page instead of login since we removed the login page
       router.push('/');
-    } catch (e) {
-      console.error('Error during logout:', e);
+    } catch (error) {
+      console.error('Logout error:', error);
     }
   };
 

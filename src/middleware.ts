@@ -32,14 +32,17 @@ export function middleware(request: NextRequest) {
       path: '/',
       maxAge: 86400, // 24 hours
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production'
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax'
     });
     
     // Also set user data in localStorage (will be used by client-side)
     response.cookies.set('userData', JSON.stringify(demoUser), {
       path: '/',
       maxAge: 86400,
-      httpOnly: false // Allow client-side access
+      httpOnly: false, // Allow client-side access
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax'
     });
     
     return response;
@@ -60,14 +63,17 @@ export function middleware(request: NextRequest) {
       path: '/',
       maxAge: 86400, // 24 hours
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production'
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax'
     });
     
     // Also set user data in localStorage (will be used by client-side)
     response.cookies.set('userData', JSON.stringify(demoUser), {
       path: '/',
       maxAge: 86400,
-      httpOnly: false // Allow client-side access
+      httpOnly: false, // Allow client-side access
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax'
     });
     
     return response;

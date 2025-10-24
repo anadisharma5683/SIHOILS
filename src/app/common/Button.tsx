@@ -21,12 +21,12 @@ const Button = ({
   disabled = false,
   ariaLabel
 }: ButtonProps) => {
-  const baseClasses = "px-6 py-3 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2";
+  const baseClasses = "px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 text-sm sm:text-base";
   
   const variantClasses = 
     variant === 'primary' 
       ? "bg-primary text-white hover:bg-highlight focus:ring-primary shadow-md" 
-      : "bg-secondary text-gray-800 hover:bg-accent focus:ring-secondary shadow-sm";
+      : "bg-secondary text-white hover:bg-orange-600 focus:ring-secondary shadow-sm";
       
   const disabledClasses = disabled ? "opacity-50 cursor-not-allowed" : "";
 

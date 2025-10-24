@@ -8,44 +8,48 @@
   Yeh hamesha light-green hi rahega.
 */
 :root {
-  --primary: oklch(0.205 0 0);
-  --secondary: oklch(0.97 0 0);
-  --accent: oklch(0.97 0 0);
-  --soft-bg: #e8f5e9ff;
-  --border: oklch(0.922 0 0);
-  --neutral: #ffffff;
-  --highlight: #2e7d32ff;
+  --primary: #1a4d3a;      /* Deep Forest Green */
+  --secondary: #d2691e;    /* Chocolate Orange */
+  --accent: #2563eb;       /* Modern Blue */
+  --soft-bg: #fefefe;      /* Clean White */
+  --border: #e5e7eb;       /* Light Gray */
+  --neutral: #f9fafb;      /* Off-white */
+  --highlight: #059669;    /* Emerald Green */
+  --text: #374151;         /* Dark Gray */
+  --text-secondary: #6b7280; /* Medium Gray */
+  --warning: #f59e0b;      /* Amber */
+  --error: #ef4444;        /* Red */
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: #fefefe;   /* Clean White */
+  --foreground: #374151;   /* Dark Gray */
+  --card: #ffffff;         /* White */
+  --card-foreground: #374151; /* Dark Gray */
+  --popover: #ffffff;      /* White */
+  --popover-foreground: #374151; /* Dark Gray */
+  --primary-foreground: #ffffff; /* White */
+  --secondary-foreground: #ffffff; /* White */
+  --muted: #f9fafb;        /* Off-white */
+  --muted-foreground: #6b7280; /* Medium Gray */
+  --accent-foreground: #ffffff; /* White */
+  --destructive: #ef4444;  /* Red */
+  --input: #f9fafb;        /* Off-white */
+  --ring: #2563eb;         /* Modern Blue */
+  --chart-1: #1a4d3a;      /* Deep Forest Green */
+  --chart-2: #d2691e;      /* Chocolate Orange */
+  --chart-3: #2563eb;      /* Modern Blue */
+  --chart-4: #059669;      /* Emerald Green */
+  --chart-5: #f59e0b;      /* Amber */
+  --sidebar: #f9fafb;      /* Off-white */
+  --sidebar-foreground: #374151; /* Dark Gray */
+  --sidebar-primary: #1a4d3a; /* Deep Forest Green */
+  --sidebar-primary-foreground: #ffffff; /* White */
+  --sidebar-accent: #e5e7eb; /* Light Gray */
+  --sidebar-accent-foreground: #374151; /* Dark Gray */
+  --sidebar-border: #e5e7eb; /* Light Gray */
+  --sidebar-ring: #2563eb; /* Modern Blue */
 }
 
 @theme inline {

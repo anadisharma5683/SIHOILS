@@ -29,7 +29,7 @@ describe('Button', () => {
     render(<Button variant="secondary">Secondary Button</Button>);
     const button = screen.getByText('Secondary Button');
     expect(button).toHaveClass('bg-secondary');
-    expect(button).toHaveClass('text-gray-800');
+    expect(button).toHaveClass('text-white');
   });
 
   it('is disabled when disabled prop is true', () => {
