@@ -7,9 +7,10 @@ interface CardProps {
   description: string;
   icon?: string;
   className?: string;
+  children?: React.ReactNode;
 }
 
-const Card = ({ title, description, icon, className = '' }: CardProps) => {
+const Card = ({ title, description, icon, className = '', children }: CardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -53,6 +54,15 @@ const Card = ({ title, description, icon, className = '' }: CardProps) => {
       >
         {description}
       </motion.p>
+      {children && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          {children}
+        </motion.div>
+      )}
     </motion.div>
   );
 };

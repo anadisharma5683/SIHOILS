@@ -1,11 +1,28 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if user is logged in
+    const userData = localStorage.getItem('user');
+    setIsLoggedIn(!!userData);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    // Also remove the auth cookie
+    document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    setIsLoggedIn(false);
+    router.push('/login');
+  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -70,6 +87,52 @@ const Navbar = () => {
               </Link>
             </motion.li>
           ))}
+          
+          {isLoggedIn ? (
+            <motion.li
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              whileHover={{ 
+                y: -2,
+                transition: { duration: 0.2 }
+              }}
+            >
+              <Link 
+                href="/dashboard"
+                className={`font-medium transition-colors duration-300 ${
+                  pathname === '/dashboard' 
+                    ? 'text-highlight border-b-2 border-highlight' 
+                    : 'text-gray-600 hover:text-primary'
+                }`}
+              >
+                Dashboard
+              </Link>
+            </motion.li>
+          ) : (
+            <motion.li
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              whileHover={{ 
+                y: -2,
+                transition: { duration: 0.2 }
+              }}
+            >
+              <Link 
+                href="/login"
+                className={`font-medium transition-colors duration-300 ${
+                  pathname === '/login' 
+                    ? 'text-highlight border-b-2 border-highlight' 
+                    : 'text-gray-600 hover:text-primary'
+                }`}
+              >
+                Login
+              </Link>
+            </motion.li>
+          )}
         </motion.ul>
       </div>
     </nav>
