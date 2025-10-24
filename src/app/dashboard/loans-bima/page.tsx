@@ -4,43 +4,80 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from '@/app/common/Button';
 import { LOAN_DATA, CLAIM_HISTORY } from '@/constants/loanData';
+import { useAuth } from '@/contexts/AuthContext';
+
+// Define types for our data
+interface LoanData {
+  id: string;
+  name: string;
+  eligibleLoan: string;
+  interest: string;
+  nextInstallment: string;
+  bank: string;
+  status: string;
+}
+
+interface ClaimHistory {
+  id: number;
+  date: string;
+  mishap: string;
+  status: string;
+}
 
 export default function LoansBimaPage() {
-  const [user, setUser] = useState<{name: string, email: string, role: string} | null>(null);
-  const [loading, setLoading] = useState(true);
   const [kccId, setKccId] = useState('');
-  const [loanInfo, setLoanInfo] = useState<any>(null);
+  const [loanInfo, setLoanInfo] = useState<LoanData | null>(null);
   const [showCamera, setShowCamera] = useState(false);
   const [claimSubmitted, setClaimSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [kccIdError, setKccIdError] = useState('');
   const router = useRouter();
+  const { user, loading, logout } = useAuth();
 
   useEffect(() => {
-    // Check if user is logged in
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setUser(JSON.parse(userData));
-    } else {
+    // Redirect to login if not authenticated
+    if (!loading && !user) {
       router.push('/login');
     }
-    setLoading(false);
-  }, [router]);
+  }, [user, loading, router]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    // Also remove the auth cookie
-    document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-    router.push('/login');
+  const validateKccId = () => {
+    if (!kccId.trim()) {
+      setKccIdError('Please enter a KCC ID');
+      return false;
+    }
+    
+    // Basic KCC ID format validation (example: XX2025KCC1234)
+    const kccIdRegex = /^[A-Z]{2}\d{4}KCC\d{4}$/;
+    if (!kccIdRegex.test(kccId)) {
+      setKccIdError('Please enter a valid KCC ID format (e.g., MP2025KCC1234)');
+      return false;
+    }
+    
+    setKccIdError('');
+    return true;
   };
 
   const handleKccSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateKccId()) {
+      return;
+    }
+    
+    setError('');
     const loanData = LOAN_DATA.find(data => data.id === kccId);
     if (loanData) {
       setLoanInfo(loanData);
     } else {
       setLoanInfo(null);
-      alert('KCC ID not found — please contact your bank.');
+      setError('KCC ID not found — please contact your bank.');
     }
+  };
+
+  const handleKccIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKccId(e.target.value.toUpperCase());
+    if (kccIdError) setKccIdError('');
   };
 
   const handleCameraCapture = () => {
@@ -75,6 +112,13 @@ export default function LoansBimaPage() {
           </Button>
         </div>
 
+        {/* Error message */}
+        {error && (
+          <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg" role="alert" aria-live="assertive">
+            {error}
+          </div>
+        )}
+
         {/* Loans & Bima Section */}
         <div className="bg-[#ffe5d9] rounded-xl p-6 shadow-lg border border-[#fec89a] mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
@@ -89,7 +133,7 @@ export default function LoansBimaPage() {
               </h3>
               
               {!loanInfo ? (
-                <form onSubmit={handleKccSubmit} className="space-y-4">
+                <form onSubmit={handleKccSubmit} className="space-y-4" aria-label="KCC ID form">
                   <div>
                     <label htmlFor="kccId" className="block text-gray-700 mb-2">
                       Enter your KCC ID to check loan eligibility
@@ -99,11 +143,19 @@ export default function LoansBimaPage() {
                       type="text"
                       id="kccId"
                       value={kccId}
-                      onChange={(e) => setKccId(e.target.value)}
-                      className="w-full px-4 py-2 border border-[#fec89a] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fec89a]"
+                      onChange={handleKccIdChange}
+                      className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                        kccIdError ? 'border-red-500 focus:ring-red-500' : 'border-[#fec89a] focus:ring-[#fec89a]'
+                      }`}
                       placeholder="e.g., MP2025KCC1234"
-                      required
+                      aria-invalid={!!kccIdError}
+                      aria-describedby={kccIdError ? "kcc-id-error" : undefined}
                     />
+                    {kccIdError && (
+                      <p id="kcc-id-error" className="text-red-500 text-sm mt-1" role="alert">
+                        {kccIdError}
+                      </p>
+                    )}
                   </div>
                   <Button type="submit" className="bg-[#fec89a] hover:bg-[#fcb87a] text-gray-800">
                     Check Eligibility
@@ -168,7 +220,7 @@ export default function LoansBimaPage() {
               </div>
               
               {claimSubmitted ? (
-                <div className="p-4 bg-green-100 text-green-700 rounded-lg mb-4">
+                <div className="p-4 bg-green-100 text-green-700 rounded-lg mb-4" role="alert" aria-live="polite">
                   Your Bima report has been saved. A representative will review it.
                   <span className="block text-sm mt-1">
                     आपकी बीमा रिपोर्ट सहेज ली गई है। एक प्रतिनिधि इसकी समीक्षा करेगा।
