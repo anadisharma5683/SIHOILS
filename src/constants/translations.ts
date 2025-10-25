@@ -61,6 +61,22 @@ const englishTranslations = {
   chooseFile: 'Choose File',
   supportsFormats: 'Supports JPG, PNG, MP4 (max 10MB)',
 
+  // Market Alerts
+  searchAlerts: 'Search alerts...',
+  allAlerts: 'All Alerts',
+  priceAlerts: 'Price Alerts',
+  weatherAlerts: 'Weather Alerts',
+  contractAlerts: 'Contract Alerts',
+  diseaseAlerts: 'Disease Alerts',
+  subsidyAlerts: 'Subsidy Alerts',
+  reportAlerts: 'Report Alerts',
+  noAlerts: 'No Alerts Found',
+  noAlertsDesc: 'No alerts match your current search and filter criteria.',
+  highPriority: 'High Priority',
+  mediumPriority: 'Medium Priority',
+  lowPriority: 'Low Priority',
+  loadMoreAlerts: 'Load More Alerts',
+
   // Learning
   learningHub: 'Learning Hub',
   learningSubtitle: 'Understanding hedging, forward contracts, and blockchain for farmers',
@@ -271,6 +287,22 @@ export const translations = {
     message: 'संदेश',
     yourMessage: 'आपका संदेश...',
     sendMessageBtn: 'संदेश भेजें',
+
+    // Market Alerts
+    searchAlerts: 'अलर्ट खोजें...',
+    allAlerts: 'सभी अलर्ट',
+    priceAlerts: 'मूल्य अलर्ट',
+    weatherAlerts: 'मौसम अलर्ट',
+    contractAlerts: 'अनुबंध अलर्ट',
+    diseaseAlerts: 'बीमारी अलर्ट',
+    subsidyAlerts: 'सब्सिडी अलर्ट',
+    reportAlerts: 'रिपोर्ट अलर्ट',
+    noAlerts: 'कोई अलर्ट नहीं मिला',
+    noAlertsDesc: 'आपकी वर्तमान खोज और फिल्टर मानदंड से कोई अलर्ट मेल नहीं खाता।',
+    highPriority: 'उच्च प्राथमिकता',
+    mediumPriority: 'मध्यम प्राथमिकता',
+    lowPriority: 'निम्न प्राथमिकता',
+    loadMoreAlerts: 'अधिक अलर्ट लोड करें',
 
     // Footer
     copyright: '© 2025 कृषि शील्ड। सर्वाधिकार सुरक्षित।',
