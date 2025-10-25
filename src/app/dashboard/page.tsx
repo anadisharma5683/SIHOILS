@@ -230,7 +230,7 @@ export default function DashboardPage() {
               </span>
             </p>
             <ButtonOld
-              className="bg-white text-[#374151] hover:bg-[#f0f9f2] w-full sm:w-auto text-sm"
+              className="bg-[#10b981] hover:bg-[#059669] text-white w-full sm:w-auto text-sm"
               onClick={() => router.push('/dashboard/loans-bima')}
             >
               Access Services
