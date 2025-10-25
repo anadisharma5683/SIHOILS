@@ -19,6 +19,7 @@ import {
 import ButtonOld from '../common/Button';
 import LoadingSkeleton from '../common/LoadingSkeleton';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 
 // Removed metadata export since we're in a Client Component
@@ -26,6 +27,7 @@ import { useAuth } from '@/contexts/AuthContext';
 export default function DashboardPage() {
   const router = useRouter();
   const { user, loading, logout } = useAuth();
+  const { t } = useLanguage();
 
   // Remove the useEffect that redirects to login since we're removing the login page
 
@@ -220,14 +222,10 @@ export default function DashboardPage() {
         <div className="relative overflow-hidden bg-gradient-to-r from-[#8aa399] to-[#545e75] p-5 sm:p-6 rounded-2xl shadow-lg border border-[#8aa399]">
           <div className="relative z-10">
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 flex items-center">
-              <Sparkles className="mr-2 text-yellow-300" size={20} /> Loans & Bima (ऋण और
-              बीमा)
+              <Sparkles className="mr-2 text-yellow-300" size={20} /> {t('loansAndBima')}
             </h2>
             <p className="text-white mb-4 text-xs sm:text-sm">
-              Secure your crops with easy loans and insurance coverage.
-              <span className="block text-xs text-white/80 mt-1">
-                ऋण सुविधाएँ और फसल बीमा सेवाएँ अब एक ही जगह।
-              </span>
+              {t('loansAndBimaDesc')}
             </p>
             <ButtonOld
               className="bg-[#10b981] hover:bg-[#059669] text-white w-full sm:w-auto text-sm"
@@ -241,7 +239,7 @@ export default function DashboardPage() {
         {/* Quick Actions Section */}
         <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-md border border-[#8aa399]">
           <h3 className="text-lg sm:text-xl font-semibold text-[#374151] mb-4 flex items-center gap-2">
-            <HeartHandshake className="text-[#304d6d]" size={20} /> Quick Actions
+            <HeartHandshake className="text-[#304d6d]" size={20} /> {t('quickActions')}
           </h3>
           
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

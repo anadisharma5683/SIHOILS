@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { learningData } from '@/constants/dummyData';
 import SectionTitle from '../common/SectionTitle';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function LearnPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -21,8 +23,8 @@ export default function LearnPage() {
           transition={{ duration: 0.5 }}
         >
           <SectionTitle 
-            title="Learning Hub" 
-            subtitle="Understanding hedging, forward contracts, and blockchain for farmers"
+            title={t('learningHub')} 
+            subtitle={t('learningSubtitle')}
           />
         </motion.div>
         
@@ -104,27 +106,16 @@ export default function LearnPage() {
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.5 }}
                     >
-                      <motion.li
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.6 }}
-                      >
-                        Helps manage price risk in agricultural markets
-                      </motion.li>
-                      <motion.li
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.7 }}
-                      >
-                        Creates predictable income streams
-                      </motion.li>
-                      <motion.li
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.8 }}
-                      >
-                        Reduces dependency on uncertain market conditions
-                      </motion.li>
+                      {item.keyPoints?.map((point, pointIndex) => (
+                        <motion.li
+                          key={pointIndex}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.6 + pointIndex * 0.1 }}
+                        >
+                          {point}
+                        </motion.li>
+                      ))}
                     </motion.ul>
                   </motion.div>
                 </motion.div>
@@ -145,7 +136,7 @@ export default function LearnPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Infographic: How Hedging Works
+            {t('howHedgingWorks')}
           </motion.h3>
           <div className="flex flex-col md:flex-row items-center justify-between">
             <motion.div 
@@ -170,7 +161,7 @@ export default function LearnPage() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                Assess Risk
+                {t('assessRisk')}
               </motion.h4>
               <motion.p 
                 className="text-gray-600"
@@ -178,7 +169,7 @@ export default function LearnPage() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                Identify price risks for your crop
+                {t('assessRiskDesc')}
               </motion.p>
             </motion.div>
             
@@ -204,7 +195,7 @@ export default function LearnPage() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                Create Contract
+                {t('createHedgingContract')}
               </motion.h4>
               <motion.p 
                 className="text-gray-600"
@@ -212,7 +203,7 @@ export default function LearnPage() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
               >
-                Lock in prices with forward contracts
+                {t('createHedgingContractDesc')}
               </motion.p>
             </motion.div>
             
@@ -238,7 +229,7 @@ export default function LearnPage() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
               >
-                Secure Income
+                {t('secureIncome')}
               </motion.h4>
               <motion.p 
                 className="text-gray-600"
@@ -246,7 +237,7 @@ export default function LearnPage() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
               >
-                Protect your harvest value
+                {t('secureIncomeDesc')}
               </motion.p>
             </motion.div>
           </div>

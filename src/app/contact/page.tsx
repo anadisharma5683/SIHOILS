@@ -4,8 +4,10 @@ import { contactData } from '@/constants/dummyData';
 import SectionTitle from '../common/SectionTitle';
 import Button from '../common/Button';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function ContactPage() {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-softBG py-12 px-4">
       <div className="container mx-auto max-w-4xl">
@@ -42,7 +44,7 @@ export default function ContactPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                Get in Touch
+                {t('getInTouch')}
               </motion.h3>
               <div className="space-y-4">
                 <motion.div 
@@ -68,7 +70,7 @@ export default function ContactPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.6 }}
                     >
-                      Email
+                      {t('email')}
                     </motion.h4>
                     <motion.p 
                       className="text-gray-600"
@@ -104,7 +106,7 @@ export default function ContactPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.7 }}
                     >
-                      Phone
+                      {t('phone')}
                     </motion.h4>
                     <motion.p 
                       className="text-gray-600"
@@ -140,7 +142,7 @@ export default function ContactPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.8 }}
                     >
-                      Office
+                      {t('office')}
                     </motion.h4>
                     <motion.p 
                       className="text-gray-600"
@@ -148,7 +150,7 @@ export default function ContactPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.9 }}
                     >
-                      Agricultural Technology Park<br />Hyderabad, India
+                      <span dangerouslySetInnerHTML={{ __html: t('officeAddress') }} />
                     </motion.p>
                   </div>
                 </motion.div>
@@ -171,7 +173,7 @@ export default function ContactPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
               >
-                Follow Us
+                {t('followUs')}
               </motion.h3>
               <div className="flex space-x-4">
                 {[1, 2, 3].map((item, index) => (
@@ -216,7 +218,7 @@ export default function ContactPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
               >
-                Send us a Message
+                {t('sendMessage')}
               </motion.h3>
               <form className="space-y-4">
                 <motion.div
@@ -224,12 +226,12 @@ export default function ContactPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <label htmlFor="name" className="block text-gray-700 mb-2">Name</label>
+                  <label htmlFor="name" className="block text-gray-700 mb-2">{t('name')}</label>
                   <input
                     type="text"
                     id="name"
                     className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-                    placeholder="Your name"
+                    placeholder={t('yourName')}
                   />
                 </motion.div>
                 
@@ -238,7 +240,7 @@ export default function ContactPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 }}
                 >
-                  <label htmlFor="email" className="block text-gray-700 mb-2">Email</label>
+                  <label htmlFor="email" className="block text-gray-700 mb-2">{t('emailLabel')}</label>
                   <input
                     type="email"
                     id="email"
@@ -252,12 +254,12 @@ export default function ContactPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 }}
                 >
-                  <label htmlFor="subject" className="block text-gray-700 mb-2">Subject</label>
+                  <label htmlFor="subject" className="block text-gray-700 mb-2">{t('subject')}</label>
                   <input
                     type="text"
                     id="subject"
                     className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-                    placeholder="How can we help?"
+                    placeholder={t('howCanWeHelp')}
                   />
                 </motion.div>
                 
@@ -266,12 +268,12 @@ export default function ContactPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.9 }}
                 >
-                  <label htmlFor="message" className="block text-gray-700 mb-2">Message</label>
+                  <label htmlFor="message" className="block text-gray-700 mb-2">{t('message')}</label>
                   <textarea
                     id="message"
                     rows={4}
                     className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-                    placeholder="Your message..."
+                    placeholder={t('yourMessage')}
                   ></textarea>
                 </motion.div>
                 
@@ -281,7 +283,7 @@ export default function ContactPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.0 }}
                 >
-                  <Button type="submit">Send Message</Button>
+                  <Button type="submit">{t('sendMessageBtn')}</Button>
                 </motion.div>
               </form>
             </motion.div>

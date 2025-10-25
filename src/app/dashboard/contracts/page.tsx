@@ -6,10 +6,12 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Search, Filter } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 import theme from '@/constants/theme';
 
 export default function ContractsPage() {
   const router = useRouter();
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
 
   // Mock data for contracts
@@ -35,15 +37,15 @@ export default function ContractsPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-[#374151]">Create Contract</h1>
-            <p className="text-[#545e75]">Browse and apply for buyback or procurement contracts</p>
+            <h1 className="text-3xl font-bold text-[#374151]">{t('createContract')}</h1>
+            <p className="text-[#545e75]">{t('browseContracts')}</p>
           </div>
           <Button
             variant="secondary"
             onClick={() => router.push('/dashboard')}
             className="bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]"
           >
-            Back to Dashboard
+            {t('backToDashboard')}
           </Button>
         </div>
 
@@ -53,13 +55,13 @@ export default function ContractsPage() {
           className="bg-white p-6 rounded-2xl shadow-md border border-[#8aa399]"
         >
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-[#374151]">Available Contracts</h2>
+            <h2 className="text-xl font-semibold text-[#374151]">{t('availableContracts')}</h2>
             <div className="flex gap-2">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
                 <input
                   type="text"
-                  placeholder="Search contracts..."
+                  placeholder={t('searchContracts')}
                   className="pl-10 pr-4 py-2 border border-[#8aa399] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8aa399]"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -67,7 +69,7 @@ export default function ContractsPage() {
               </div>
               <Button variant="secondary" className="flex items-center gap-2 bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]">
                 <Filter size={16} />
-                Filter
+                {t('filter')}
               </Button>
             </div>
           </div>
@@ -82,10 +84,10 @@ export default function ContractsPage() {
                     <p className="text-lg font-bold text-[#304d6d] mt-2">{contract.rate}</p>
                     <p className="text-sm text-[#545e75]">Duration: {contract.duration}</p>
                   </div>
-                  <Button size="sm" className="bg-[#304d6d] hover:bg-[#203d5d]">Apply</Button>
+                  <Button size="sm" className="bg-[#304d6d] hover:bg-[#203d5d]">{t('apply')}</Button>
                 </div>
                 <div className="mt-3 p-2 bg-[#f0f9f2] rounded text-sm text-[#374151]">
-                  <span className="font-medium">AI Recommendation:</span> Best for your current groundnut crop
+                  <span className="font-medium">{t('aiRecommendation')}:</span> {t('bestForGroundnut')}
                 </div>
               </Card>
             ))}

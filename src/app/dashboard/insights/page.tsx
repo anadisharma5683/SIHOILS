@@ -6,9 +6,11 @@ import { Button } from '@/components/ui/button';
 import { MapPin, TrendingUp } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import theme from '@/constants/theme';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function InsightsPage() {
   const router = useRouter();
+  const { t } = useLanguage();
 
   // Mock data for market insights
   const marketInsightsData = [
@@ -27,8 +29,8 @@ export default function InsightsPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-[#374151]">Market Insights</h1>
-            <p className="text-[#545e75]">Visualize mandi data and real-time selling rates</p>
+            <h1 className="text-3xl font-bold text-[#374151]">{t('marketInsightsTitle')}</h1>
+            <p className="text-[#545e75]">{t('visualizeMandiData')}</p>
           </div>
           <Button
             variant="secondary"
@@ -45,10 +47,10 @@ export default function InsightsPage() {
           className="bg-white p-6 rounded-2xl shadow-md border border-[#8aa399]"
         >
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-[#374151]">Live Market Rates</h2>
+            <h2 className="text-xl font-semibold text-[#374151]">{t('liveMarketRates')}</h2>
             <Button variant="secondary" className="flex items-center gap-2 bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]">
               <MapPin size={16} />
-              View Map
+              {t('viewMap')}
             </Button>
           </div>
           
@@ -56,10 +58,10 @@ export default function InsightsPage() {
             <table className="min-w-full bg-white border border-[#8aa399] rounded-lg">
               <thead>
                 <tr className="bg-[#f0f9f2]">
-                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">Crop</th>
-                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">Location</th>
-                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">Current Rate (₹/quintal)</th>
-                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">Change</th>
+                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">{t('crop')}</th>
+                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">{t('location')}</th>
+                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">{t('currentRate')}</th>
+                  <th className="py-3 px-4 text-left text-[#374151] font-semibold">{t('change')}</th>
                 </tr>
               </thead>
               <tbody>

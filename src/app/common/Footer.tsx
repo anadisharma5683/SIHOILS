@@ -1,8 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer = () => {
+  const { t } = useLanguage();
   return (
     <footer className="bg-softBG py-8 px-6 border-t border-border">
       <div className="container mx-auto">
@@ -22,7 +24,7 @@ const Footer = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            © 2025 Krishi Shield. All rights reserved.
+            {t('copyright')}
           </motion.p>
           <motion.p 
             className="text-gray-500 text-sm"
@@ -30,7 +32,7 @@ const Footer = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            Empowering Indian oilseed farmers with innovative financial tools
+            {t('footerTagline')}
           </motion.p>
           
           <motion.div 

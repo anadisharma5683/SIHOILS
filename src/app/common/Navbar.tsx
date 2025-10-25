@@ -5,9 +5,12 @@ import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Navbar = () => {
   const pathname = usePathname();
+  const { t } = useLanguage();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -23,11 +26,11 @@ const Navbar = () => {
 
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Features', path: '/features' },
-    { name: 'Learn', path: '/learn' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' }
+    { name: t('home'), path: '/' },
+    { name: t('features'), path: '/features' },
+    { name: t('learn'), path: '/learn' },
+    { name: t('about'), path: '/about' },
+    { name: t('contact'), path: '/contact' }
   ];
 
   const toggleMenu = () => {
@@ -153,7 +156,7 @@ const Navbar = () => {
                   aria-current={pathname === '/login' ? "page" : undefined}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Login
+                  {t('login')}
                 </Link>
               </motion.li>
             )}
@@ -251,10 +254,19 @@ const Navbar = () => {
                 role="menuitem"
                 aria-current={pathname === '/login' ? "page" : undefined}
               >
-                Login
-              </Link>
-            </motion.li>
-          )}
+                  Login
+                </Link>
+              </motion.li>
+            )}          {/* Language Switcher */}
+          <motion.li
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}
+            role="none"
+          >
+            <LanguageSwitcher />
+          </motion.li>
         </motion.ul>
       </div>
     </nav>

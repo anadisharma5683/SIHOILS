@@ -6,9 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Download, LineChart } from 'lucide-react';
 import { LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import theme from '@/constants/theme';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function ReportsPage() {
   const router = useRouter();
+  const { t } = useLanguage();
 
   // Mock data for price trends
   const priceTrendData = [
@@ -29,8 +31,8 @@ export default function ReportsPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-[#374151]">View Reports</h1>
-            <p className="text-[#545e75]">Analyze current and projected prices of different oilseeds</p>
+            <h1 className="text-3xl font-bold text-[#374151]">{t('viewReportsTitle')}</h1>
+            <p className="text-[#545e75]">{t('analyzePrices')}</p>
           </div>
           <Button
             variant="secondary"
@@ -47,15 +49,15 @@ export default function ReportsPage() {
           className="bg-white p-6 rounded-2xl shadow-md border border-[#8aa399]"
         >
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-[#374151]">Oilseed Price Trends</h2>
+            <h2 className="text-xl font-semibold text-[#374151]">{t('oilseedPriceTrends')}</h2>
             <div className="flex gap-2">
               <Button variant="secondary" className="flex items-center gap-2 bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]">
                 <Download size={16} />
-                PDF
+                {t('pdf')}
               </Button>
               <Button variant="secondary" className="flex items-center gap-2 bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]">
                 <Download size={16} />
-                CSV
+                {t('csv')}
               </Button>
             </div>
           </div>
@@ -105,8 +107,8 @@ export default function ReportsPage() {
           
           <div className="bg-[#f0f9f2] p-4 rounded-lg mt-6">
             <p className="text-[#374151]">
-              <span className="font-semibold">Mustard likely to rise 4% next week</span> - 
-              Strong export demand from European markets driving prices up.
+              <span className="font-semibold">{t('mustardRisePrediction')}</span> - 
+              {t('exportDemand')}
             </p>
           </div>
         </motion.div>

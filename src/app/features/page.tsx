@@ -6,8 +6,10 @@ import HedgingSimulator from './components/HedgingSimulator';
 import EContractsDemo from './components/EContractsDemo';
 import MarketAlerts from './components/MarketAlerts';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function FeaturesPage() {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-softBG py-12 px-4">
       <div className="container mx-auto max-w-6xl">
@@ -17,8 +19,8 @@ export default function FeaturesPage() {
           transition={{ duration: 0.5 }}
         >
           <SectionTitle 
-            title="Platform Features" 
-            subtitle="Explore the tools that help protect your income from price volatility"
+            title={t('platformFeatures')} 
+            subtitle={t('featuresSubtitle')}
           />
         </motion.div>
         

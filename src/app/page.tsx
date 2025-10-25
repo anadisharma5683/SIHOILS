@@ -6,8 +6,10 @@ import Card from './common/Card';
 import { motion, LazyMotion, domAnimation } from 'framer-motion';
 import Link from 'next/link';
 import ImageOptimized from '@/components/ImageOptimized';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Home() {
+  const { t } = useLanguage();
   return (
     <LazyMotion features={domAnimation}>
       <div className="min-h-screen bg-gradient-to-br from-softBG via-neutral to-softBG text-center">
@@ -90,7 +92,7 @@ export default function Home() {
                     variant="secondary"
                     className="w-full sm:w-auto text-base py-3 px-6 h-12 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-accent/30"
                   >
-                    Go to Dashboard
+                    {t('goToDashboard')}
                   </Button>
                 </Link>
               </motion.div>
@@ -109,10 +111,10 @@ export default function Home() {
               className="text-center mb-8 sm:mb-12 md:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-3">
-                How Krishi Shield Protects You
+                {t('howKrishiShieldProtects')}
               </h2>
               <p className="text-sm sm:text-base md:text-lg text-textSecondary max-w-2xl mx-auto">
-                Our platform provides essential tools to help oilseed farmers manage price volatility.
+                {t('platformDescription')}
               </p>
             </motion.div>
 
@@ -148,10 +150,10 @@ export default function Home() {
               className="space-y-6 sm:space-y-8"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary leading-tight">
-                Ready to Protect Your Harvest?
+                {t('readyToProtectHarvest')}
               </h2>
               <p className="text-sm sm:text-base md:text-lg text-textSecondary max-w-2xl mx-auto leading-relaxed">
-                Join thousands of farmers already using Krishi Shield to safeguard their income.
+                {t('joinThousandsFarmers')}
               </p>
               <div className="pt-2">
                 <Link href="/dashboard" className="inline-block w-full sm:w-auto">

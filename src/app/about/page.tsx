@@ -3,8 +3,10 @@
 import { aboutData } from '@/constants/dummyData';
 import SectionTitle from '../common/SectionTitle';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AboutPage() {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-softBG py-12 px-4">
       <div className="container mx-auto max-w-4xl">
@@ -14,8 +16,8 @@ export default function AboutPage() {
           transition={{ duration: 0.5 }}
         >
           <SectionTitle 
-            title="About Krishi Shield" 
-            subtitle="Our mission to protect Indian oilseed farmers from price volatility"
+            title={t('aboutKrishiShield')} 
+            subtitle={t('aboutSubtitle')}
           />
         </motion.div>
         
@@ -35,7 +37,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            Our Story
+            {t('ourStory')}
           </motion.h3>
           <motion.p 
             className="text-gray-600 mb-4"
@@ -72,7 +74,7 @@ export default function AboutPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Our Vision
+              {t('ourVision')}
             </motion.h3>
             <motion.p 
               className="text-gray-600"
@@ -100,7 +102,7 @@ export default function AboutPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              Why Krishi Shield?
+              {t('whyKrishiShield')}
             </motion.h3>
             <motion.ul 
               className="list-disc pl-5 space-y-2 text-gray-600"
@@ -113,28 +115,28 @@ export default function AboutPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.7 }}
               >
-                Farmer-first approach to financial tools
+                {t('farmerFirstApproach')}
               </motion.li>
               <motion.li
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8 }}
               >
-                Simplified complex hedging concepts
+                {t('simplifiedHedging')}
               </motion.li>
               <motion.li
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.9 }}
               >
-                Accessible technology for rural communities
+                {t('accessibleTechnology')}
               </motion.li>
               <motion.li
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.0 }}
               >
-                Transparent and trustworthy platform
+                {t('transparentPlatform')}
               </motion.li>
             </motion.ul>
           </motion.div>
@@ -156,7 +158,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            Our Team
+            {t('ourTeam')}
           </motion.h3>
           <motion.p 
             className="text-gray-600 mb-4"
@@ -164,8 +166,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
           >
-            We are a diverse team of agricultural experts, financial technologists, and rural development specialists 
-            committed to empowering Indian farmers through innovative technology.
+            {t('teamDescription1')}
           </motion.p>
           <motion.p 
             className="text-gray-600"
@@ -173,8 +174,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            Our platform combines deep domain knowledge with cutting-edge technology to create solutions that truly 
-            serve the needs of oilseed farmers across India.
+            {t('teamDescription2')}
           </motion.p>
         </motion.div>
       </div>
