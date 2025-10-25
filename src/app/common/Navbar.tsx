@@ -160,6 +160,20 @@ const Navbar = () => {
                 </Link>
               </motion.li>
             )}
+            
+            {/* Language Switcher - Mobile */}
+            <motion.li
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              role="none"
+              className="pt-2 border-t border-gray-200"
+            >
+              <div className="px-4">
+                <LanguageSwitcher />
+              </div>
+            </motion.li>
           </motion.ul>
         )}
         
