@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -20,7 +19,7 @@ import {
 import ButtonOld from '../common/Button';
 import LoadingSkeleton from '../common/LoadingSkeleton';
 import { useAuth } from '@/contexts/AuthContext';
-import theme from '@/constants/theme';
+
 
 // Removed metadata export since we're in a Client Component
 
@@ -247,7 +246,7 @@ export default function DashboardPage() {
           
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <ButtonOld 
-              className="h-16 sm:h-20 md:h-24 flex flex-col items-center justify-center gap-1 bg-[#8aa399] hover:bg-[#7a9389] text-white text-xs sm:text-sm"
+              className="h-16 sm:h-20 md:h-24 flex flex-col items-center justify-center gap-1 bg-[#3b82f6] hover:bg-[#2563eb] text-white text-xs sm:text-sm"
               onClick={() => router.push('/dashboard/contracts')}
             >
               <FileText size={16} />
@@ -255,7 +254,7 @@ export default function DashboardPage() {
             </ButtonOld>
             <ButtonOld 
               variant="secondary" 
-              className="h-16 sm:h-20 md:h-24 flex flex-col items-center justify-center gap-1 text-xs sm:text-sm bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]"
+              className="h-16 sm:h-20 md:h-24 flex flex-col items-center justify-center gap-1 text-xs sm:text-sm bg-[#10b981] hover:bg-[#059669] border border-[#10b981] text-white"
               onClick={() => router.push('/dashboard/reports')}
             >
               <LineChart size={16} />
@@ -263,14 +262,14 @@ export default function DashboardPage() {
             </ButtonOld>
             <ButtonOld 
               variant="secondary" 
-              className="h-16 sm:h-20 md:h-24 flex flex-col items-center justify-center gap-1 text-xs sm:text-sm bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]"
+              className="h-16 sm:h-20 md:h-24 flex flex-col items-center justify-center gap-1 text-xs sm:text-sm bg-[#8b5cf6] hover:bg-[#7c3aed] border border-[#8b5cf6] text-white"
               onClick={() => router.push('/dashboard/insights')}
             >
               <TrendingUp size={16} />
               <span className="font-medium">Market Insights</span>
             </ButtonOld>
             <ButtonOld 
-              className="h-16 sm:h-20 md:h-24 flex flex-col items-center justify-center gap-1 bg-[#545e75] hover:bg-[#444e65] text-white text-xs sm:text-sm"
+              className="h-16 sm:h-20 md:h-24 flex flex-col items-center justify-center gap-1 bg-[#f59e0b] hover:bg-[#d97706] text-white text-xs sm:text-sm"
               onClick={() => router.push('/dashboard/support')}
             >
               <MessageCircle size={16} />

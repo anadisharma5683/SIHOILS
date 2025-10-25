@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Button from '@/app/common/Button';
 import { LOAN_DATA, CLAIM_HISTORY } from '@/constants/loanData';
 import { useAuth } from '@/contexts/AuthContext';
-import theme from '@/constants/theme';
+
 
 // Define types for our data
 interface LoanData {
@@ -18,12 +18,6 @@ interface LoanData {
   status: string;
 }
 
-interface ClaimHistory {
-  id: number;
-  date: string;
-  mishap: string;
-  status: string;
-}
 
 export default function LoansBimaPage() {
   const [kccId, setKccId] = useState('');
@@ -33,7 +27,7 @@ export default function LoansBimaPage() {
   const [error, setError] = useState('');
   const [kccIdError, setKccIdError] = useState('');
   const router = useRouter();
-  const { user, loading, logout } = useAuth();
+  const { user, loading } = useAuth();
 
   useEffect(() => {
     // Redirect to login if not authenticated
@@ -108,7 +102,7 @@ export default function LoansBimaPage() {
             <h1 className="text-2xl font-bold text-[#374151]">Loans & Bima</h1>
             <p className="text-[#545e75]">Access credit and insurance services</p>
           </div>
-          <Button onClick={() => router.push('/dashboard')} variant="secondary" className="bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]">
+          <Button onClick={() => router.push('/dashboard')} variant="secondary" className="bg-[#f59e0b] hover:bg-[#d97706] border border-[#f59e0b] text-white">
             Back to Dashboard
           </Button>
         </div>
@@ -158,7 +152,7 @@ export default function LoansBimaPage() {
                       </p>
                     )}
                   </div>
-                  <Button type="submit" className="bg-[#304d6d] hover:bg-[#203d5d] text-white">
+                  <Button type="submit" className="bg-[#059669] hover:bg-[#047857] text-white">
                     Check Eligibility
                   </Button>
                 </form>
@@ -197,7 +191,7 @@ export default function LoansBimaPage() {
                   <Button 
                     onClick={() => setLoanInfo(null)} 
                     variant="secondary"
-                    className="w-full bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]"
+                    className="w-full bg-[#10b981] hover:bg-[#059669] border border-[#10b981] text-white"
                   >
                     Check Another KCC ID
                   </Button>
@@ -230,7 +224,7 @@ export default function LoansBimaPage() {
               ) : (
                 <Button 
                   onClick={() => setShowCamera(true)}
-                  className="w-full bg-[#304d6d] hover:bg-[#203d5d] text-white mb-4 flex items-center justify-center"
+                  className="w-full bg-[#dc2626] hover:bg-[#b91c1c] text-white mb-4 flex items-center justify-center"
                 >
                   <span className="mr-2">📷</span> Capture Photo/Video to Report Damage
                 </Button>
@@ -245,14 +239,14 @@ export default function LoansBimaPage() {
                   <div className="flex space-x-2">
                     <Button 
                       onClick={handleCameraCapture}
-                      className="flex-1 bg-green-500 hover:bg-green-600"
+                      className="flex-1 bg-[#059669] hover:bg-[#047857]"
                     >
                       Capture
                     </Button>
                     <Button 
                       onClick={() => setShowCamera(false)}
                       variant="secondary"
-                      className="flex-1 bg-white hover:bg-[#f0f9f2] border border-[#8aa399] text-[#374151]"
+                      className="flex-1 bg-[#6b7280] hover:bg-[#4b5563] border border-[#6b7280] text-white"
                     >
                       Cancel
                     </Button>

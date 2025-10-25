@@ -1,14 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const pathname = usePathname();
-  const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -22,13 +21,6 @@ const Navbar = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    // Also remove the auth cookie
-    document.cookie = 'authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-    setIsLoggedIn(false);
-    router.push('/login');
-  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -152,10 +144,10 @@ const Navbar = () => {
               >
                 <Link 
                   href="/login"
-                  className={`block py-2 font-medium transition-colors duration-300 ${
+                  className={`block py-2 px-4 rounded-lg font-medium transition-all duration-300 ${
                     pathname === '/login' 
-                      ? 'text-highlight border-l-4 border-highlight pl-4' 
-                      : 'text-gray-600 hover:text-primary pl-4'
+                      ? 'bg-[#10b981] text-white border-l-4 border-[#059669] pl-4' 
+                      : 'bg-[#10b981] text-white hover:bg-[#059669] pl-4'
                   }`}
                   role="menuitem"
                   aria-current={pathname === '/login' ? "page" : undefined}
@@ -251,10 +243,10 @@ const Navbar = () => {
             >
               <Link 
                 href="/login"
-                className={`font-medium transition-colors duration-300 ${
+                className={`py-2 px-4 rounded-lg font-medium transition-all duration-300 ${
                   pathname === '/login' 
-                    ? 'text-highlight border-b-2 border-highlight' 
-                    : 'text-gray-600 hover:text-primary'
+                    ? 'bg-[#10b981] text-white border-b-2 border-[#059669]' 
+                    : 'bg-[#10b981] text-white hover:bg-[#059669]'
                 }`}
                 role="menuitem"
                 aria-current={pathname === '/login' ? "page" : undefined}

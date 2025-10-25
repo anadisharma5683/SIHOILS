@@ -10,7 +10,7 @@ import ImageOptimized from '@/components/ImageOptimized';
 export default function Home() {
   return (
     <LazyMotion features={domAnimation}>
-      <div className="min-h-screen bg-gradient-to-br from-softBG via-neutral to-softBG">
+      <div className="min-h-screen bg-gradient-to-br from-softBG via-neutral to-softBG text-center">
         {/* 🌅 HERO SECTION */}
         <section className="pt-20 pb-12 px-4 sm:pt-24 sm:pb-16 md:pt-32 md:pb-20 relative overflow-hidden">
           {/* Faint diagonal gradient overlay */}
